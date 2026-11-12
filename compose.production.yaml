@@ -1,0 +1,16 @@
+# Optional local production-image check on http://localhost:10000.
+# Run: docker compose -f compose.yaml -f compose.production.yaml up --build -d production
+# HTTPS is required to sign in with Secure production cookies. This HTTP port is for static/health smoke checks.
+services:
+  production:
+    build: .
+    environment:
+      APP_ENV: production
+      SECRET_KEY: ${SECRET_KEY:?Set SECRET_KEY}
+      DATABASE_URL: postgresql+psycopg://ahabridge:${POSTGRES_PASSWORD}@db:5432/ahabridge
+      DEMO_MODE: "false"
+      SEED_DEMO: "false"
+      PORT: 10000
+    ports: ["127.0.0.1:10000:10000"]
+    depends_on:
+      db: {condition: service_healthy}

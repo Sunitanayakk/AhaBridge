@@ -1,0 +1,56 @@
+{
+  "name": "ahabridge",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "tsc -b && vite build",
+    "typecheck": "tsc -b",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "preview": "vite preview --host 0.0.0.0"
+  },
+  "dependencies": {
+    "@fontsource/kalam": "5.2.7",
+    "@fontsource/patrick-hand": "5.2.7",
+    "@hookform/resolvers": "5.2.2",
+    "@tanstack/react-query": "5.90.5",
+    "framer-motion": "12.23.24",
+    "idb": "8.0.3",
+    "lucide-react": "0.548.0",
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
+    "react-hook-form": "7.65.0",
+    "react-router-dom": "7.18.5",
+    "recharts": "3.3.0",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@eslint/js": "9.38.0",
+    "@tailwindcss/vite": "4.1.14",
+    "@testing-library/jest-dom": "6.9.1",
+    "@testing-library/react": "16.3.0",
+    "@types/node": "24.9.1",
+    "@types/react": "19.1.16",
+    "@types/react-dom": "19.1.9",
+    "@vitejs/plugin-react": "5.0.4",
+    "eslint": "9.38.0",
+    "eslint-plugin-react-hooks": "5.2.0",
+    "globals": "16.4.0",
+    "jsdom": "27.0.1",
+    "prettier": "3.6.2",
+    "tailwindcss": "4.1.14",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.72.2",
+    "vite": "7.3.8",
+    "vite-plugin-pwa": "1.1.0",
+    "vitest": "5.1.0"
+  },
+  "overrides": {
+    "motion-dom": "12.23.23",
+    "motion-utils": "12.23.6",
+    "minimatch": "11.0.1",
+    "glob": "14.0.5"
+  }
+}
