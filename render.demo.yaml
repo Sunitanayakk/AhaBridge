@@ -1,0 +1,33 @@
+# Synthetic hackathon preview. Select this path when creating the Render Blueprint.
+# DEMO_PASSWORD is entered privately in Render; no password belongs in this file.
+services:
+  - type: web
+    name: ahabridge-demo
+    runtime: docker
+    plan: free
+    region: singapore
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/v1/health
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DATABASE_URL
+        fromDatabase:
+          name: ahabridge-demo-db
+          property: connectionString
+      - key: DEMO_MODE
+        value: "true"
+      - key: SEED_DEMO
+        value: "true"
+      - key: DEMO_PASSWORD
+        sync: false
+      - key: ECHO_HOURS
+        value: "72"
+databases:
+  - name: ahabridge-demo-db
+    plan: free
+    region: singapore
+    databaseName: ahabridge_demo
+    user: ahabridge_demo

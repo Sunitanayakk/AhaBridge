@@ -4,6 +4,19 @@ Reference checked 12 November 2026: [Blueprint specification](https://render.com
 
 The architecture is one Docker web service serving Flask and the Vite output on one origin, and one managed PostgreSQL database in Singapore. No disk, upload bucket or worker is required. The service binds `0.0.0.0:${PORT:-10000}`. `/api/v1/health` checks database connectivity.
 
+## Quick setup for the hackathon demo
+
+Use **`render.demo.yaml`** as the Blueprint Path instead of `render.yaml`. It provisions `ahabridge-demo` and `ahabridge-demo-db`, enables the synthetic-only demo clock and automatically seeds synthetic classrooms on startup. Enter a private `DEMO_PASSWORD` of at least 12 characters when Render prompts; the secret is not stored in Git. The insert-once seed does not reset existing data or change existing account passwords on later deploys. Changing `DEMO_PASSWORD` after first seeding does not reset those accounts.
+
+1. Create an empty GitHub repository named `ahabridge`, then push this project from `D:\AhaBridge`. Do not upload `.env`, `.local`, `.venv` or `node_modules`.
+2. Open the Render dashboard, choose **New → Blueprint**, connect the repository, and select its `main` branch.
+3. Set **Blueprint Path** to **`render.demo.yaml`**. Enter the private `DEMO_PASSWORD` when prompted. Review the web service/database plans and Singapore availability, then select **Deploy Blueprint**.
+4. Docker builds the frontend and Flask image; startup migrates PostgreSQL and inserts the synthetic data. Do not configure separate frontend hosting, build/start commands, a root-directory override or SQLite. The Dockerfile supplies the build and startup commands.
+5. After the service is live, open its Render-provided HTTPS URL, `/api/v1/health` (expect `{"status":"ok"}`), and `/demo`.
+6. Sign in with `teacher@demo.ahabridge.test`, `student01@demo.ahabridge.test`, or `admin@demo.ahabridge.test`, using the password you entered in Render. The public `/demo` tour does not require a login.
+
+The original `render.yaml` remains the non-demo configuration. Use one Blueprint for a chosen deployment; do not import the same resources into multiple Blueprints. Both files use preview/free plans by default. Choose paid compute/database plans for a durable school deployment.
+
 ## Before publishing
 
 1. Verify rights to publish the supplied artwork. Confirm school authorization/consent and retention for real records. Use synthetic records for a public hackathon preview.
